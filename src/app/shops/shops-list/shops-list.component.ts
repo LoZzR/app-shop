@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShopService } from '../shop-service.service';
 
 @Component({
   selector: 'app-shops-list',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopsListComponent implements OnInit {
 
-  constructor() { }
+  shops = [];
+
+  constructor(private shopService: ShopService) { }
 
   ngOnInit() {
+    this.shops = this.shopService.getShops();
   }
 
 }

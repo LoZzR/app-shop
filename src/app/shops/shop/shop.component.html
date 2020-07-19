@@ -1,1 +1,12 @@
-<p>shop works!</p>
+<div class="thumbnail">
+  <img [src]="shop.imagePath" alt="{{shop.name}}" class="img-responsive" style="max-height: 50px;">
+  <div class="caption">
+    <h3>{{shop.name}}</h3>
+      <p>{{showedDescription}}</p>
+      <p>
+        <a href="#" class="btn btn-primary" role="button">Like</a>
+        <a href="#" class="btn btn-default" role="button">Dislike</a>
+        <a href="#" class="btn btn-primary" role="button">View</a>
+      </p>
+  </div>
+</div>

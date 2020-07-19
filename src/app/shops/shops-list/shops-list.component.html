@@ -1,4 +1,8 @@
-<div>
-  This is the list of shops
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 col-md-3" *ngFor="let shop of shops;">
+      <app-shop [shop]="shop"></app-shop>
+    </div>
+  </div>
 </div>
 
