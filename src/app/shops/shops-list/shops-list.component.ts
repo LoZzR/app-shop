@@ -13,7 +13,11 @@ export class ShopsListComponent implements OnInit {
   constructor(private shopService: ShopService) { }
 
   ngOnInit() {
-    this.shops = this.shopService.getShops();
+    this.shopService.getShops().subscribe(
+      shops => {
+        this.shops = shops;
+      }
+    );
   }
 
 }
