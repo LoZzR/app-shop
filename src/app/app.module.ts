@@ -10,13 +10,15 @@ import { ShopsListComponent } from './shops/shops-list/shops-list.component';
 import { ShopComponent } from './shops/shop/shop.component';
 import { HeaderComponent } from './home/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShopsListComponent,
     ShopComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

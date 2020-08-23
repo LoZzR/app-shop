@@ -1,3 +1,6 @@
+<div *ngIf="isLoading" style="text-align: center;">
+  <app-loading-spinner></app-loading-spinner>
+</div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-6 col-md-3" *ngFor="let shop of shops;">

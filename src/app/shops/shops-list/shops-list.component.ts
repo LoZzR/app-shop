@@ -9,6 +9,7 @@ import { ShopService } from '../shop-service.service';
 export class ShopsListComponent implements OnInit {
 
   shops = [];
+  isLoading: boolean = true;
 
   constructor(private shopService: ShopService) { }
 
@@ -16,6 +17,7 @@ export class ShopsListComponent implements OnInit {
     this.shopService.getShops().subscribe(
       shops => {
         this.shops = shops;
+        this.isLoading = false;
       }
     );
   }
