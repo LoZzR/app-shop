@@ -45,12 +45,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-#tscobfig
-tsconfig.app.json
-tsconfig.json
-tsconfig.spec.json
-tslint.json
-
 #editorConfig
 .editorconfig
 
