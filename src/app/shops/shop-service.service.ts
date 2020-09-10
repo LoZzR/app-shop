@@ -12,7 +12,7 @@ export class ShopService {
   getShops(){
     return this.http
       .get<Shop[]>(
-        'http://localhost:8080/shops'
+        'http://localhost:9090/shops/api'
       );
   }
 }

@@ -14,6 +14,10 @@ export class ShopsListComponent implements OnInit {
   constructor(private shopService: ShopService) { }
 
   ngOnInit() {
+    
+  }
+
+  fetch(){
     this.shopService.getShops().subscribe(
       shops => {
         this.shops = shops;
