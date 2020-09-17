@@ -11,6 +11,10 @@ const appRoutes: Routes = [
   {
     path: 'products',
     component: ShopsListComponent
+  },
+  {
+    path: 'liked-shops',
+    component: ShopsListComponent
   }
 ];
 

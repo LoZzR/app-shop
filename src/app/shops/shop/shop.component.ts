@@ -9,6 +9,7 @@ import { Shop } from '../shop.model';
 export class ShopComponent implements OnInit {
 
   @Input() shop: Shop;
+  @Input() preferredPage: String;
   showedDescription: string;
 
   constructor() { }

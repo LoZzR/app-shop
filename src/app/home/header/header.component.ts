@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {MenuItem} from 'primeng/api';
-import { getCurrencySymbol } from '@angular/common';
-import { KeycloakService } from 'keycloak-angular';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +7,5 @@ import { KeycloakService } from 'keycloak-angular';
 })
 export class HeaderComponent{
 
-  constructor(private keycloak: KeycloakService) {
-  }
-
-  login(){
-    this.keycloak.login({
-      redirectUri: window.location.origin + "/shops",
-    });
-  }
 
 }

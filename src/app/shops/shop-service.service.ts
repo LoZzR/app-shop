@@ -12,7 +12,22 @@ export class ShopService {
   getShops(){
     return this.http
       .get<Shop[]>(
-        'http://localhost:9090/shops/api'
+        'http://localhost:8090/shops'
       );
   }
+
+  getLikedShops(){
+    return this.http
+      .get<Shop[]>(
+        'http://localhost:8090/liked-shops'
+      );
+  }
+
+  likeShop(nameShop: String){
+    return this.http.post(
+      'http://localhost:8090/shops/like', nameShop
+    );
+  }
+
+  
 }

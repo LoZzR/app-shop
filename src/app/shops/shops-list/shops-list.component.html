@@ -1,10 +1,10 @@
 <div *ngIf="isLoading" style="text-align: center;">
-  <button (click)="fetch()">Fetch Data</button>
+  <app-loading-spinner></app-loading-spinner>
 </div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-6 col-md-3" *ngFor="let shop of shops;">
-      <app-shop [shop]="shop"></app-shop>
+      <app-shop [shop]="shop" [preferredPage]="preferredPage"></app-shop>
     </div>
   </div>
 </div>

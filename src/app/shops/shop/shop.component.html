@@ -3,10 +3,6 @@
   <div class="caption">
     <h3>{{shop.name}}</h3>
       <p>{{showedDescription}}</p>
-      <p>
-        <a href="#" class="btn btn-primary" role="button">Like</a>
-        <a href="#" class="btn btn-default" role="button">Dislike</a>
-        <a href="#" class="btn btn-primary" role="button">View</a>
-      </p>
+      <app-bar-buttons [nameShop]="shop.name" *ngIf="!preferredPage"></app-bar-buttons>
   </div>
 </div>
