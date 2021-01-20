@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ShopService } from '../../shop-service.service';
 
 @Component({
@@ -8,9 +9,10 @@ import { ShopService } from '../../shop-service.service';
 })
 export class BarButtonsComponent implements OnInit {
 
-  @Input() nameShop: String;
+  @Input() idShop: number;
+  isAdmin: boolean = true;
 
-  constructor(private shopService: ShopService) {
+  constructor(private shopService: ShopService, private router: Router, private route: ActivatedRoute) {
     
   }
 
@@ -18,7 +20,11 @@ export class BarButtonsComponent implements OnInit {
   }
 
   likeShop(){
-    this.shopService.likeShop(this.nameShop).subscribe();;
+    this.shopService.likeShop(this.idShop).subscribe();;
+  }
+
+  editShop(){
+    this.router.navigate(["/shops", this.idShop]);
   }
 
 }

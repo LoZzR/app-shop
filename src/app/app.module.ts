@@ -12,6 +12,7 @@ import { HeaderComponent } from './home/header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { BarButtonsComponent } from './shops/shop/bar-buttons/bar-buttons.component';
+import { EditShopComponent } from './shops/shop/edit-shop/edit-shop.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { BarButtonsComponent } from './shops/shop/bar-buttons/bar-buttons.compon
     HeaderComponent,
     LoadingSpinnerComponent,
     BarButtonsComponent,
+    EditShopComponent,
   ],
   imports: [
     BrowserModule,

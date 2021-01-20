@@ -1,5 +1,13 @@
-<p>
-    <a class="btn btn-primary" type="button" (click)="likeShop()">Like</a>
-    <a href="#" class="btn btn-default" role="button">Dislike</a>
-    <a href="#" class="btn btn-primary" role="button">View</a>
-</p>
+<div *ngIf="!isAdmin; else admin">
+    <p>
+        <a class="btn btn-primary" type="button" (click)="likeShop()">Like</a>
+        <a href="#" class="btn btn-default" role="button">Dislike</a>
+        <a href="#" class="btn btn-primary" role="button">View</a>
+    </p>
+</div>
+<ng-template #admin>
+    <p>
+        <a class="btn btn-primary" type="button" (click)="editShop()">Edit</a>
+        <a  class="btn btn-default" type="button">View</a>
+    </p>
+</ng-template>

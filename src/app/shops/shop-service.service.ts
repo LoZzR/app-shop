@@ -16,6 +16,13 @@ export class ShopService {
       );
   }
 
+  getShop(idShop: number){
+    return this.http
+      .get<Shop>(
+        'http://localhost:8090/shops/' + idShop
+      );
+  }
+
   getLikedShops(){
     return this.http
       .get<Shop[]>(
@@ -23,9 +30,17 @@ export class ShopService {
       );
   }
 
-  likeShop(nameShop: String){
+  addShop(shop: Shop){
+    return this.http.post<Shop>("http://localhost:8090/shops",shop);
+  }
+
+  editShop(shop: Shop){
+    return this.http.put<Shop>("http://localhost:8090/shops",shop);
+  }
+
+  likeShop(idShop: number){
     return this.http.post(
-      'http://localhost:8090/shops/like', nameShop
+      'http://localhost:8090/shops/like', idShop
     );
   }
 
