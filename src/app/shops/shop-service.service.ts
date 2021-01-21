@@ -38,6 +38,10 @@ export class ShopService {
     return this.http.put<Shop>("http://localhost:8090/shops",shop);
   }
 
+  deleteShop(idShop: number){
+    return this.http.delete<void>('http://localhost:8090/shops/' + idShop);
+  }
+
   likeShop(idShop: number){
     return this.http.post(
       'http://localhost:8090/shops/like', idShop

@@ -27,4 +27,8 @@ export class BarButtonsComponent implements OnInit {
     this.router.navigate(["/shops", this.idShop]);
   }
 
+  deleteShop(){
+    this.shopService.deleteShop(this.idShop).subscribe();
+  }
+
 }
