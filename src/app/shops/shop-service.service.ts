@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Shop } from './shop.model';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
+
+  shopChanged = new Subject<Shop[]>();
+  private shops: Shop[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -14,6 +18,10 @@ export class ShopService {
       .get<Shop[]>(
         'http://localhost:8090/shops'
       );
+  }
+
+  setShops(shops: Shop[]){
+    this.shops = shops;
   }
 
   getShop(idShop: number){
@@ -39,6 +47,16 @@ export class ShopService {
   }
 
   deleteShop(idShop: number){
+    let indexShop = 0;
+    for(let i = 0; i < this.shops.length ; i++){
+      if(this.shops[i].id === idShop){
+        indexShop = i;
+        break;
+      }
+    }
+    
+    this.shops.splice(indexShop, 1);
+    this.shopChanged.next(this.shops.slice());
     return this.http.delete<void>('http://localhost:8090/shops/' + idShop);
   }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ShopService } from '../shop-service.service';
 
 @Component({
@@ -7,12 +8,13 @@ import { ShopService } from '../shop-service.service';
   templateUrl: './shops-list.component.html',
   styleUrls: ['./shops-list.component.css']
 })
-export class ShopsListComponent implements OnInit {
+export class ShopsListComponent implements OnInit, OnDestroy {
 
   shops = [];
   isLoading: boolean = true;
   preferredPage: boolean = false;
   isAdmin: boolean = true;
+  subscription: Subscription;
 
   constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) { }
 
@@ -30,7 +32,14 @@ export class ShopsListComponent implements OnInit {
       this.shopService.getShops().subscribe(
         shops => {
           this.shops = shops;
+          this.shopService.setShops(shops);
           this.isLoading = false;
+        }
+      );
+
+      this.subscription = this.shopService.shopChanged.subscribe(
+        shops => {
+          this.shops = shops;
         }
       );
     }
@@ -38,6 +47,10 @@ export class ShopsListComponent implements OnInit {
 
   onNewShop() {
     this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 }
