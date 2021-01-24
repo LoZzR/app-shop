@@ -34,6 +34,8 @@ export class ShopsListComponent implements OnInit, OnDestroy {
           this.shops = shops;
           this.shopService.setShops(shops);
           this.isLoading = false;
+        }, error => {
+          this.router.navigate(['error', error.status]);
         }
       );
 

@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { BarButtonsComponent } from './shops/shop/bar-buttons/bar-buttons.component';
 import { EditShopComponent } from './shops/shop/edit-shop/edit-shop.component';
+import { ErrorComponent } from './shared/error/error/error.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { EditShopComponent } from './shops/shop/edit-shop/edit-shop.component';
     LoadingSpinnerComponent,
     BarButtonsComponent,
     EditShopComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { AppConfig } from '../app.config';
 export class ShopService {
 
   shopChanged = new Subject<Shop[]>();
+
   private shops: Shop[] = [];
   private static API_ENDPOINT_SHOPS = AppConfig.API_ENDPOINT + 'shops';
 
