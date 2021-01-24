@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Shop } from './shop.model';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { AppConfig } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,14 @@ export class ShopService {
 
   shopChanged = new Subject<Shop[]>();
   private shops: Shop[] = [];
+  private static API_ENDPOINT_SHOPS = AppConfig.API_ENDPOINT + 'shops';
 
   constructor(private http: HttpClient) { }
 
   getShops(){
     return this.http
       .get<Shop[]>(
-        'http://localhost:8090/shops'
+        ShopService.API_ENDPOINT_SHOPS
       );
   }
 
@@ -27,23 +29,23 @@ export class ShopService {
   getShop(idShop: number){
     return this.http
       .get<Shop>(
-        'http://localhost:8090/shops/' + idShop
+        ShopService.API_ENDPOINT_SHOPS + '/' + idShop
       );
   }
 
   getLikedShops(){
     return this.http
       .get<Shop[]>(
-        'http://localhost:8090/liked-shops'
+        ShopService.API_ENDPOINT_SHOPS + '/liked'
       );
   }
 
   addShop(shop: Shop){
-    return this.http.post<Shop>("http://localhost:8090/shops",shop);
+    return this.http.post<Shop>(ShopService.API_ENDPOINT_SHOPS,shop);
   }
 
   editShop(shop: Shop){
-    return this.http.put<Shop>("http://localhost:8090/shops",shop);
+    return this.http.put<Shop>(ShopService.API_ENDPOINT_SHOPS,shop);
   }
 
   deleteShop(idShop: number){
@@ -57,12 +59,12 @@ export class ShopService {
     
     this.shops.splice(indexShop, 1);
     this.shopChanged.next(this.shops.slice());
-    return this.http.delete<void>('http://localhost:8090/shops/' + idShop);
+    return this.http.delete<void>(ShopService.API_ENDPOINT_SHOPS + '/' + idShop);
   }
 
   likeShop(idShop: number){
     return this.http.post(
-      'http://localhost:8090/shops/like', idShop
+      ShopService.API_ENDPOINT_SHOPS + '/like', idShop
     );
   }
 
