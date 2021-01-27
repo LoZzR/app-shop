@@ -14,6 +14,11 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { BarButtonsComponent } from './shops/shop/bar-buttons/bar-buttons.component';
 import { EditShopComponent } from './shops/shop/edit-shop/edit-shop.component';
 import { ErrorComponent } from './shared/error/error/error.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { ProfileComponent } from './auth/profile/profile.component';
+
+import { AuthInterceptorService } from './auth/services/auth.interceptor.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,9 @@ import { ErrorComponent } from './shared/error/error/error.component';
     BarButtonsComponent,
     EditShopComponent,
     ErrorComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +41,11 @@ import { ErrorComponent } from './shared/error/error/error.component';
     HttpClientModule,
     AppRoutingModule],
   providers: [
-
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
