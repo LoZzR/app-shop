@@ -19,6 +19,9 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 
 import { AuthInterceptorService } from './auth/services/auth.interceptor.service';
+import { HomeComponent } from './home/home/home.component';
+import { BoardAdminComponent } from './home/board-admin/board-admin.component';
+import { BoardUserComponent } from './home/board-user/board-user.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { AuthInterceptorService } from './auth/services/auth.interceptor.service
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    HomeComponent,
+    BoardAdminComponent,
+    BoardUserComponent,
   ],
   imports: [
     BrowserModule,
