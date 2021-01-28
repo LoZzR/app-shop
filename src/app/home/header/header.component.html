@@ -10,14 +10,20 @@
         </div>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" *ngIf="isLoggedIn">
           <li routerLinkActive="active"><a routerLink="/shops">Shops</a></li>
           <li routerLinkActive="active"><a routerLink="/products">Products</a></li>
           <li routerLinkActive="active"><a routerLink="/liked-shops">Preferred Shops</a></li>
         </ul>
-        <ul class="navbar-form navbar-right">
-          <button type="" class="btn">Sign in</button>
-          <button type="" class="btn btn-primary">Sign up</button>
+        <ul class="navbar-form navbar-right" *ngIf="!isLoggedIn">
+          <button type="" class="btn" routerLink="/login">Sign in</button>
+          <button type="" class="btn btn-primary" routerLink="/register">Sign up</button>
+        </ul>
+        <ul class="navbar-form navbar-right" *ngIf="isLoggedIn">
+          <button type="" class="btn">LogOut</button>
+        </ul>
+        <ul class="navbar-form navbar-right" *ngIf="isLoggedIn && isAdmin">
+          <button type="" class="btn">Manage Shops</button>
         </ul>
       </div>
     </div>
