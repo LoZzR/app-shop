@@ -65,7 +65,7 @@ export class ShopService {
 
   likeShop(idShop: number){
     return this.http.post(
-      ShopService.API_ENDPOINT_SHOPS + '/like', idShop
+      ShopService.API_ENDPOINT_SHOPS + '/like/' + idShop,""
     );
   }
 

@@ -8,7 +8,6 @@ import { TokenStorageService } from 'src/app/auth/services/token-storage.service
 })
 export class HeaderComponent implements OnInit{
 
-  private roles: string[];
   isLoggedIn = false;
   isAdmin = false;
   username: string;
@@ -16,15 +15,13 @@ export class HeaderComponent implements OnInit{
   constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit() {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    this.isLoggedIn = this.tokenStorageService.isLoggedIn();
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-
-      this.isAdmin = this.roles.includes('ROLE_ADMIN');
-
       this.username = user.username;
+
+      this.isAdmin = this.tokenStorageService.isAdmin();
     }
   }
 

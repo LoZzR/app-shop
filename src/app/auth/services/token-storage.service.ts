@@ -31,4 +31,17 @@ export class TokenStorageService {
   public getUser() {
     return JSON.parse(sessionStorage.getItem(USER_KEY));
   }
+
+  public isLoggedIn(){
+    return !!this.getToken();
+  }
+
+  public isAdmin(){
+    if (this.isLoggedIn()) {
+      const user = this.getUser();
+      return user.roles.includes('ROLE_ADMIN');
+    }
+    return false;
+  }
+
 }

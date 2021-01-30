@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/auth/services/token-storage.service';
 import { ShopService } from '../../shop-service.service';
 
 @Component({
@@ -10,13 +11,14 @@ import { ShopService } from '../../shop-service.service';
 export class BarButtonsComponent implements OnInit {
 
   @Input() idShop: number;
-  isAdmin: boolean = true;
+  isAdmin = false;
 
-  constructor(private shopService: ShopService, private router: Router, private route: ActivatedRoute) {
+  constructor(private shopService: ShopService, private router: Router, private route: ActivatedRoute, private tokenStorageService: TokenStorageService) {
     
   }
 
   ngOnInit(): void {
+    this.isAdmin = this.tokenStorageService.isAdmin();
   }
 
   likeShop(){
