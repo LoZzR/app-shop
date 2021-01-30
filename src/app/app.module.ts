@@ -16,6 +16,7 @@ import { EditShopComponent } from './shops/shop/edit-shop/edit-shop.component';
 import { ErrorComponent } from './shared/error/error/error.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { HomeComponent } from './home/home/home.component';
 
 import { AuthInterceptorService } from './auth/services/auth.interceptor.service';
 
@@ -29,6 +30,7 @@ import { AuthInterceptorService } from './auth/services/auth.interceptor.service
     BarButtonsComponent,
     EditShopComponent,
     ErrorComponent,
+    HomeComponent,
     LoginComponent,
     RegisterComponent,
   ],
