@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { TokenStorageService } from 'src/app/auth/services/token-storage.service';
 
 @Component({
@@ -12,21 +14,23 @@ export class HeaderComponent implements OnInit{
   isAdmin = false;
   username: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  private userSub: Subscription;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.isLoggedIn = this.tokenStorageService.isLoggedIn();
-
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.username = user.username;
-
-      this.isAdmin = this.tokenStorageService.isAdmin();
-    }
+    this.userSub = this.authService.user.subscribe(user => {
+      this.isLoggedIn = !!user;
+      if (this.isLoggedIn) {
+        this.username = user.username;
+  
+        this.isAdmin = this.authService.isAdmin();
+      }
+    });
   }
 
   logout() {
-    this.tokenStorageService.signOut();
+    this.authService.signOut();
     window.location.reload();
   }
 }
