@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AuthGuard } from './auth/services/auth.guard';
 import { HomeComponent } from './home/home/home.component';
 import { ErrorComponent } from './shared/error/error/error.component';
 import { EditShopComponent } from './shops/shop/edit-shop/edit-shop.component';
@@ -15,10 +15,7 @@ const appRoutes: Routes = [
     path: 'register', component: RegisterComponent
   },
   {
-    path: 'home', component: HomeComponent
-  },
-  {
-    path: '', redirectTo: 'home', pathMatch: 'full' 
+    path: '', redirectTo: 'shops', pathMatch: 'full' 
   },
   {
     path: 'error/:errorCode',
@@ -26,19 +23,19 @@ const appRoutes: Routes = [
   },
   {
     path: 'shops',
-    component: ShopsListComponent,
+    component: ShopsListComponent, canActivate: [AuthGuard]
   },
   {
     path: 'shops/:id',
-    component: EditShopComponent
+    component: EditShopComponent, canActivate: [AuthGuard]
   },
   {
     path: 'products',
-    component: ShopsListComponent
+    component: ShopsListComponent, canActivate: [AuthGuard]
   },
   {
     path: 'liked-shops',
-    component: ShopsListComponent
+    component: ShopsListComponent, canActivate: [AuthGuard]
   }
 ];
 
