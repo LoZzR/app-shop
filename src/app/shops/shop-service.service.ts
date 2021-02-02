@@ -41,6 +41,13 @@ export class ShopService {
       );
   }
 
+  getNotLikedShops(){
+    return this.http
+      .get<Shop[]>(
+        ShopService.API_ENDPOINT_SHOPS + '/not-liked'
+      );
+  }
+
   addShop(shop: Shop){
     return this.http.post<Shop>(ShopService.API_ENDPOINT_SHOPS,shop);
   }
@@ -50,6 +57,18 @@ export class ShopService {
   }
 
   deleteShop(idShop: number){
+    this.removeShop(idShop);
+    return this.http.delete<void>(ShopService.API_ENDPOINT_SHOPS + '/' + idShop);
+  }
+
+  likeShop(idShop: number){
+    this.removeShop(idShop);
+    return this.http.post(
+      ShopService.API_ENDPOINT_SHOPS + '/like/' + idShop,""
+    );
+  }
+
+  private removeShop(idShop: number){
     let indexShop = 0;
     for(let i = 0; i < this.shops.length ; i++){
       if(this.shops[i].id === idShop){
@@ -60,13 +79,6 @@ export class ShopService {
     
     this.shops.splice(indexShop, 1);
     this.shopChanged.next(this.shops.slice());
-    return this.http.delete<void>(ShopService.API_ENDPOINT_SHOPS + '/' + idShop);
-  }
-
-  likeShop(idShop: number){
-    return this.http.post(
-      ShopService.API_ENDPOINT_SHOPS + '/like/' + idShop,""
-    );
   }
 
   
