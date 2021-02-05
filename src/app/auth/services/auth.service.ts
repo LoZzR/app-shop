@@ -17,9 +17,13 @@ const httpOptions = {
 })
 export class AuthService {
 
-user = new BehaviorSubject<User>(null);
+  user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient, private tokenStorageService: TokenStorageService) { }
+  constructor(private http: HttpClient, private tokenStorageService: TokenStorageService) {
+    if(this.tokenStorageService.getToken()){
+      this.user.next(this.tokenStorageService.getUser());
+    }
+  }
 
   login(credentials): Observable<any> {
     return this.http.post(AppConfig.AUTH_API + 'signin', {

@@ -20,7 +20,7 @@
           <button type="" class="btn btn-primary" routerLink="/register">Sign up</button>
         </ul>
         <ul class="navbar-form navbar-right" *ngIf="isLoggedIn">
-          <button type="" class="btn">LogOut</button>
+          <button type="" class="btn" (click)="logout()">LogOut</button>
         </ul>
         <ul class="navbar-form navbar-right" *ngIf="isLoggedIn && isAdmin">
           <button type="" class="btn">Manage Shops</button>
