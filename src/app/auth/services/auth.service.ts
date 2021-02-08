@@ -64,8 +64,8 @@ export class AuthService {
 
   
   public isAdmin(){
-    if (this.user.value) {
-      const user = this.user.value;
+    if (this.tokenStorageService.getUser()) {
+      const user = this.tokenStorageService.getUser();
       return user.roles.includes('ROLE_ADMIN');
     }
     return false;

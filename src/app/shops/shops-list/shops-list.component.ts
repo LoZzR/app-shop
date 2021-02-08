@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { ShopService } from '../shop-service.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class ShopsListComponent implements OnInit, OnDestroy {
   isAdmin: boolean = true;
   subscription: Subscription;
 
-  constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.preferredPage = this.route.snapshot.url[0].path === "liked-shops" ? true : false;
@@ -48,6 +49,8 @@ export class ShopsListComponent implements OnInit, OnDestroy {
         this.shops = shops;
       }
     );
+
+    this.isAdmin = this.authService.isAdmin();
   }
 
   onNewShop() {

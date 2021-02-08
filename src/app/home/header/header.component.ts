@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { TokenStorageService } from 'src/app/auth/services/token-storage.service';
@@ -8,7 +8,7 @@ import { TokenStorageService } from 'src/app/auth/services/token-storage.service
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit, OnDestroy{
 
   isLoggedIn = false;
   isAdmin = false;
@@ -23,8 +23,7 @@ export class HeaderComponent implements OnInit{
       this.isLoggedIn = !!user;
       if (this.isLoggedIn) {
         this.username = user.username;
-  
-        this.isAdmin = this.authService.isAdmin();
+        this.isAdmin = user.roles.includes('ROLE_ADMIN');
       }
     });
   }
@@ -32,5 +31,9 @@ export class HeaderComponent implements OnInit{
   logout() {
     this.authService.signOut();
     window.location.reload();
+  }
+
+  ngOnDestroy(){
+    this.userSub.unsubscribe();
   }
 }
