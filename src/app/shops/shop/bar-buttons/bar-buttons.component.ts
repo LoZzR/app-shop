@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ShopService } from '../../shop-service.service';
+import { Shop } from '../../shop.model';
 
 @Component({
   selector: 'app-bar-buttons',
@@ -10,7 +11,7 @@ import { ShopService } from '../../shop-service.service';
 })
 export class BarButtonsComponent implements OnInit {
 
-  @Input() idShop: number;
+  @Input() shop: Shop;
   isAdmin = false;
 
   constructor(private shopService: ShopService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
@@ -22,15 +23,15 @@ export class BarButtonsComponent implements OnInit {
   }
 
   likeShop(){
-    this.shopService.likeShop(this.idShop).subscribe();;
+    this.shopService.likeShop(this.shop.id).subscribe();;
   }
 
   editShop(){
-    this.router.navigate(["/shops", this.idShop]);
+    this.router.navigate(["/shops", this.shop.id]);
   }
 
   deleteShop(){
-    this.shopService.deleteShop(this.idShop).subscribe();
+    this.shopService.deleteShop(this.shop.id).subscribe();
   }
 
 }

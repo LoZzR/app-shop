@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ShopService } from '../../shop-service.service';
@@ -12,26 +12,20 @@ import { Shop } from '../../shop.model';
 export class EditShopComponent implements OnInit {
 
   @ViewChild('f', { static: false }) shopForm: NgForm;
+  @Input() shop: Shop;
   editMode = false;
   editionShopId: number;
 
   constructor(private shopService: ShopService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const idShop = this.route.snapshot.params['id'];
-    this.editMode = idShop ? true : false;
-    if(this.editMode){
-      this.shopService.getShop(idShop).subscribe(
-        (shop: Shop) => {
-          this.shopForm.setValue({
-            name: shop.name,
-            description: shop.description,
-            imagePath: shop.imagePath
-          });
-          this.editionShopId = shop.id;
-          this.editMode = true;
-        }
-      );
+    if(this.shop !== undefined && this.shop !== null){
+      console.log("******************" + this.shop.name + "***" +this.shop.description + "****"+ this.shop.imagePath);
+      this.shopForm.setValue({
+        name: this.shop.name,
+        description: this.shop.description,
+        imagePath: this.shop.imagePath
+      });
     }
   }
 
@@ -42,7 +36,7 @@ export class EditShopComponent implements OnInit {
       this.shopService.addShop(shop).subscribe();
     }
     else{
-      const shop = new Shop(this.editionShopId, value.name, value.description, value.imagePath);
+      const shop = new Shop(this.shop.id, value.name, value.description, value.imagePath);
       this.shopService.editShop(shop).subscribe(
         (shop: Shop) => console.log(shop)
       );

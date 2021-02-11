@@ -3,6 +3,6 @@
   <div class="caption">
     <h3>{{shop.name}}</h3>
       <p>{{showedDescription}}</p>
-      <app-bar-buttons [idShop]="shop.id" *ngIf="!preferredPage"></app-bar-buttons>
+      <app-bar-buttons [shop]="shop" *ngIf="!preferredPage"></app-bar-buttons>
   </div>
 </div>

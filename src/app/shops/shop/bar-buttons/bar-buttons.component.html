@@ -7,8 +7,12 @@
 </div>
 <ng-template #admin>
     <p>
-        <a class="btn btn-primary" type="button" (click)="editShop()">Edit</a>
+        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Edit</a>
         <a  class="btn btn-default" type="button">View</a>
         <a  class="btn btn-danger" type="button" (click)="deleteShop()">Delete</a>
     </p>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <app-edit-shop [shop]="shop"></app-edit-shop>
+    </div>
 </ng-template>
