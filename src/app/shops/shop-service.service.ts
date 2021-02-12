@@ -49,7 +49,12 @@ export class ShopService {
   }
 
   addShop(shop: Shop){
-    return this.http.post<Shop>(ShopService.API_ENDPOINT_SHOPS,shop);
+    return this.http.post<Shop>(ShopService.API_ENDPOINT_SHOPS,shop).subscribe(
+      (shop: Shop) => {
+        this.shops.push(shop);
+        this.shopChanged.next(this.shops.slice());
+      }
+    );
   }
 
   editShop(shop: Shop){
