@@ -41,14 +41,11 @@
                   required
                 >
               </div>
+                <button
+                class="btn btn-success"
+                type="submit"
+                [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
           </form>
-    </div>
-    <div class="modal-footer">
-      <button
-      class="btn btn-success"
-      type="submit"
-      data-dismiss="modal"
-      [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add' }}</button>
     </div>
   </div>
 

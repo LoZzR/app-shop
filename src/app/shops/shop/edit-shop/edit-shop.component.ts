@@ -19,14 +19,14 @@ export class EditShopComponent implements OnInit {
   constructor(private shopService: ShopService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    if(this.shop !== undefined && this.shop !== null){
+    /*if(this.shop !== undefined && this.shop !== null){
       console.log("******************" + this.shop.name + "***" +this.shop.description + "****"+ this.shop.imagePath);
       this.shopForm.setValue({
         name: this.shop.name,
         description: this.shop.description,
         imagePath: this.shop.imagePath
       });
-    }
+    }*/
   }
 
   onSubmit(f){
