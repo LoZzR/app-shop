@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { ShopService } from '../../shop-service.service';
 import { Shop } from '../../shop.model';
 
@@ -12,22 +11,15 @@ import { Shop } from '../../shop.model';
 export class EditShopComponent implements OnInit {
 
   @ViewChild('f', { static: false }) shopForm: NgForm;
+  @ViewChild('closebutton') closebutton;
   @Input() shop: Shop;
   editMode = false;
   editionShopId: number
-  Ismodelhide = false;
 
-  constructor(private shopService: ShopService, private route: ActivatedRoute) { }
+  constructor(private shopService: ShopService) { }
 
-  ngOnInit(): void {
-    /*if(this.shop !== undefined && this.shop !== null){
-      console.log("******************" + this.shop.name + "***" +this.shop.description + "****"+ this.shop.imagePath);
-      this.shopForm.setValue({
-        name: this.shop.name,
-        description: this.shop.description,
-        imagePath: this.shop.imagePath
-      });
-    }*/
+  ngOnInit(){
+
   }
 
   onSubmit(f){
@@ -43,10 +35,8 @@ export class EditShopComponent implements OnInit {
         (shop: Shop) => console.log(shop)
       );
     }
-  }
 
-  close(){
-    this.Ismodelhide = true;
+    this.closebutton.nativeElement.click();
   }
 
 }
