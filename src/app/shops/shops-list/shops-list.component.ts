@@ -25,10 +25,15 @@ export class ShopsListComponent implements OnInit, OnDestroy {
       this.shopService.getLikedShops().subscribe(
         shops => {
           this.shops = shops;
-          this.shopService.setShops(shops);
+          this.shopService.setPreferredShops(shops);
           this.isLoading = false;
         }, error => {
           this.router.navigate(['error', error.status]);
+        }
+      );
+      this.subscription = this.shopService.preferredShopChanged.subscribe(
+        shops => {
+          this.shops = shops;
         }
       );
     }
@@ -42,13 +47,13 @@ export class ShopsListComponent implements OnInit, OnDestroy {
           this.router.navigate(['error', error.status]);
         }
       );
+      
+      this.subscription = this.shopService.shopChanged.subscribe(
+        shops => {
+          this.shops = shops;
+        }
+      );
     }
-
-    this.subscription = this.shopService.shopChanged.subscribe(
-      shops => {
-        this.shops = shops;
-      }
-    );
 
     this.isAdmin = this.authService.isAdmin();
   }

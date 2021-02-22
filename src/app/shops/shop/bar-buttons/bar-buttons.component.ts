@@ -12,13 +12,15 @@ import { Shop } from '../../shop.model';
 export class BarButtonsComponent implements OnInit {
 
   @Input() idShop: number;
-  isAdmin = false;
+  isAdmin: boolean = false;
+  isPreferredPage: boolean = false;
 
   constructor(private shopService: ShopService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
     
   }
 
   ngOnInit(): void {
+    this.isPreferredPage = this.route.snapshot.url.toString() === 'liked-shops' ? true : false;
     this.isAdmin = this.authService.isAdmin();
   }
 
@@ -32,6 +34,10 @@ export class BarButtonsComponent implements OnInit {
 
   deleteShop(){
     this.shopService.deleteShop(this.idShop).subscribe();
+  }
+
+  removeLikedShop(){
+    this.shopService.removeFromLikedShopList(this.idShop).subscribe();
   }
 
 }

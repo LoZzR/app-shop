@@ -10,8 +10,11 @@ import { AppConfig } from '../app.config';
 export class ShopService {
 
   shopChanged = new Subject<Shop[]>();
+  preferredShopChanged = new Subject<Shop[]>();
 
   private shops: Shop[] = [];
+  private preferredShops: Shop[] = [];
+
   private static API_ENDPOINT_SHOPS = AppConfig.API_ENDPOINT + 'shops';
 
   constructor(private http: HttpClient) { }
@@ -25,6 +28,10 @@ export class ShopService {
 
   setShops(shops: Shop[]){
     this.shops = shops;
+  }
+
+  setPreferredShops(shops: Shop[]){
+    this.preferredShops = shops;
   }
 
   getShop(idShop: number){
@@ -62,28 +69,33 @@ export class ShopService {
   }
 
   deleteShop(idShop: number){
-    this.removeShop(idShop);
+    this.removeShop(idShop, this.shops, this.shopChanged);
     return this.http.delete<void>(ShopService.API_ENDPOINT_SHOPS + '/' + idShop);
   }
 
   likeShop(idShop: number){
-    this.removeShop(idShop);
+    this.removeShop(idShop, this.shops, this.shopChanged);
     return this.http.post(
       ShopService.API_ENDPOINT_SHOPS + '/like/' + idShop,""
     );
   }
 
-  private removeShop(idShop: number){
+  removeFromLikedShopList(idShop: number){
+    this.removeShop(idShop, this.preferredShops, this.preferredShopChanged);
+    return this.http.delete<void>(ShopService.API_ENDPOINT_SHOPS + '/liked/' + idShop);
+  }
+
+  private removeShop(idShop: number, listShops: Shop[], listShopsChanged:  Subject<Shop[]>){
     let indexShop = 0;
-    for(let i = 0; i < this.shops.length ; i++){
-      if(this.shops[i].id === idShop){
+    for(let i = 0; i < listShops.length ; i++){
+      if(listShops[i].id === idShop){
         indexShop = i;
         break;
       }
     }
     
-    this.shops.splice(indexShop, 1);
-    this.shopChanged.next(this.shops.slice());
+    listShops.splice(indexShop, 1);
+    listShopsChanged.next(listShops.slice());
   }
 
   

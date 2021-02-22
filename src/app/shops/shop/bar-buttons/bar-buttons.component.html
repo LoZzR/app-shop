@@ -1,14 +1,20 @@
-<div *ngIf="!isAdmin; else admin">
-    <p>
-        <a class="btn btn-primary" type="button" (click)="likeShop()">Like</a>
-        <a href="#" class="btn btn-default" role="button">Dislike</a>
-        <a href="#" class="btn btn-primary" role="button">View</a>
-    </p>
+<div *ngIf="!isPreferredPage; else preferredPage">
+    <div *ngIf="!isAdmin; else admin">
+        <p>
+            <a class="btn btn-primary" type="button" (click)="likeShop()">Like</a>
+            <a href="#" class="btn btn-default" role="button">Dislike</a>
+            <a href="#" class="btn btn-primary" role="button">View</a>
+        </p>
+    </div>
+    <ng-template #admin>
+        <p>
+            <a type="button" class="btn btn-primary" (click)="editShop()">Edit</a>
+            <a  class="btn btn-default" type="button">View</a>
+            <a  class="btn btn-danger" type="button" (click)="deleteShop()">Delete</a>
+        </p>
+    </ng-template>
 </div>
-<ng-template #admin>
-    <p>
-        <a type="button" class="btn btn-primary" (click)="editShop()">Edit</a>
-        <a  class="btn btn-default" type="button">View</a>
-        <a  class="btn btn-danger" type="button" (click)="deleteShop()">Delete</a>
-    </p>
+
+<ng-template #preferredPage>
+    <a  class="btn btn-danger" type="button" (click)="removeLikedShop()">Delete</a>
 </ng-template>
