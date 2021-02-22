@@ -19,6 +19,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './home/home/home.component';
 
 import { AuthInterceptorService } from './auth/services/auth.interceptor.service';
+import { EditFormComponent } from './shops/shop/edit-shop/edit-form/edit-form.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AuthInterceptorService } from './auth/services/auth.interceptor.service
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    EditFormComponent,
   ],
   imports: [
     BrowserModule,

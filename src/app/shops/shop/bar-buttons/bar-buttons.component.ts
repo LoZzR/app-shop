@@ -11,7 +11,7 @@ import { Shop } from '../../shop.model';
 })
 export class BarButtonsComponent implements OnInit {
 
-  @Input() shop: Shop;
+  @Input() idShop: number;
   isAdmin = false;
 
   constructor(private shopService: ShopService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
@@ -23,15 +23,15 @@ export class BarButtonsComponent implements OnInit {
   }
 
   likeShop(){
-    this.shopService.likeShop(this.shop.id).subscribe();;
+    this.shopService.likeShop(this.idShop).subscribe();
   }
 
   editShop(){
-    this.router.navigate(["/shops", this.shop.id]);
+    this.router.navigate(["/shops", this.idShop]);
   }
 
   deleteShop(){
-    this.shopService.deleteShop(this.shop.id).subscribe();
+    this.shopService.deleteShop(this.idShop).subscribe();
   }
 
 }
