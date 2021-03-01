@@ -17,9 +17,34 @@ export class ShopsListComponent implements OnInit, OnDestroy {
   isAdmin: boolean = true;
   subscription: Subscription;
 
+  page = 1;
+  count = 0;
+  pageSize = 1;
+  pageSizes = [1, 2, 3, 4];
+
   constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    this.retrieveShops();
+  }
+
+  onNewShop() {
+    this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
+  handlePageChange(event) {
+    this.page = event;
+    this.retrieveShops();
+  }
+
+  handlePageSizeChange(event) {
+    this.pageSize = event.target.value;
+    this.page = 1;
+    this.retrieveShops();
+  }
+
+  private retrieveShops(){
+    const params = this.getRequestParams(this.page, this.pageSize);
     this.preferredPage = this.route.snapshot.url[0].path === "liked-shops" ? true : false;
     if(this.preferredPage){
       this.shopService.getLikedShops().subscribe(
@@ -27,6 +52,7 @@ export class ShopsListComponent implements OnInit, OnDestroy {
           this.shops = shops;
           this.shopService.setPreferredShops(shops);
           this.isLoading = false;
+          this.count = shops['totalItems'];
         }, error => {
           this.router.navigate(['error', error.status]);
         }
@@ -38,11 +64,12 @@ export class ShopsListComponent implements OnInit, OnDestroy {
       );
     }
     else{
-      this.shopService.getNotLikedShops().subscribe(
+      this.shopService.getNotLikedShops(params).subscribe(
         shops => {
-          this.shops = shops;
+          this.shops = shops['shops'];
           this.shopService.setShops(shops);
           this.isLoading = false;
+          this.count = shops['totalItems'];;
         }, error => {
           this.router.navigate(['error', error.status]);
         }
@@ -58,8 +85,19 @@ export class ShopsListComponent implements OnInit, OnDestroy {
     this.isAdmin = this.authService.isAdmin();
   }
 
-  onNewShop() {
-    this.router.navigate(['new'], {relativeTo: this.route});
+  private getRequestParams(page, pageSize) {
+
+    let params = {};
+
+    if (page) {
+      params[`page`] = page - 1;
+    }
+
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+
+    return params;
   }
 
   ngOnDestroy(){

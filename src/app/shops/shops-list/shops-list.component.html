@@ -6,10 +6,32 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-6 col-md-3" *ngFor="let shop of shops;">
+    <div class="col-sm-6 col-md-3" *ngFor="let shop of shops | paginate : {
+      itemsPerPage: pageSize,
+      currentPage: page,
+      totalItems: count
+    };">
       <app-shop [shop]="shop" [preferredPage]="preferredPage"></app-shop>
     </div>
   </div>
+</div>
+
+<div class="mt-3">
+    Items per Page:
+    <select (change)="handlePageSizeChange($event)">
+      <option *ngFor="let size of pageSizes" [ngValue]="size">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+
+<div class="col-md-12">
+  <pagination-controls
+    previousLabel="Prev"
+    nextLabel="Next"
+    responsive="true"
+    (pageChange)="handlePageChange($event)"
+  ></pagination-controls>
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">

@@ -48,11 +48,11 @@ export class ShopService {
       );
   }
 
-  getNotLikedShops(){
+  getNotLikedShops(params){
     return this.http
       .get<Shop[]>(
         ShopService.API_ENDPOINT_SHOPS + '/not-liked'
-      );
+      ,{ params });
   }
 
   addShop(shop: Shop){
