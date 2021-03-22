@@ -12,8 +12,8 @@ export class ShopService {
   shopChanged = new Subject<Shop[]>();
   preferredShopChanged = new Subject<Shop[]>();
 
-  private shops: Shop[] = [];
-  private preferredShops: Shop[] = [];
+  private shops: Shop[];
+  private preferredShops: Shop[];
 
   private static API_ENDPOINT_SHOPS = AppConfig.API_ENDPOINT + 'shops';
 

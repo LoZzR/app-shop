@@ -49,8 +49,8 @@ export class ShopsListComponent implements OnInit, OnDestroy {
     if(this.preferredPage){
       this.shopService.getLikedShops().subscribe(
         shops => {
-          this.shops = shops;
-          this.shopService.setPreferredShops(shops);
+          this.shops = shops['shops'];
+          this.shopService.setPreferredShops(shops['shops']);
           this.isLoading = false;
           this.count = shops['totalItems'];
         }, error => {
@@ -59,7 +59,7 @@ export class ShopsListComponent implements OnInit, OnDestroy {
       );
       this.subscription = this.shopService.preferredShopChanged.subscribe(
         shops => {
-          this.shops = shops;
+          this.shops = shops['shops'];
         }
       );
     }
@@ -67,7 +67,7 @@ export class ShopsListComponent implements OnInit, OnDestroy {
       this.shopService.getNotLikedShops(params).subscribe(
         shops => {
           this.shops = shops['shops'];
-          this.shopService.setShops(shops);
+          this.shopService.setShops(shops['shops']);
           this.isLoading = false;
           this.count = shops['totalItems'];;
         }, error => {
@@ -77,7 +77,7 @@ export class ShopsListComponent implements OnInit, OnDestroy {
       
       this.subscription = this.shopService.shopChanged.subscribe(
         shops => {
-          this.shops = shops;
+          this.shops = shops['shops'];
         }
       );
     }
