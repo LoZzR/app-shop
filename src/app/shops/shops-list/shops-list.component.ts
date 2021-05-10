@@ -59,7 +59,7 @@ export class ShopsListComponent implements OnInit, OnDestroy {
       );
       this.subscription = this.shopService.preferredShopChanged.subscribe(
         shops => {
-          this.shops = shops['shops'];
+          this.shops = shops;
         }
       );
     }
@@ -77,7 +77,7 @@ export class ShopsListComponent implements OnInit, OnDestroy {
       
       this.subscription = this.shopService.shopChanged.subscribe(
         shops => {
-          this.shops = shops['shops'];
+          this.shops = shops;
         }
       );
     }
