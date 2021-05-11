@@ -19,7 +19,7 @@ export class ShopsListComponent implements OnInit, OnDestroy {
 
   page = 1;
   count = 0;
-  pageSize = 1;
+  pageSize = 4;
   pageSizes = [1, 2, 3, 4];
 
   constructor(private shopService: ShopService, private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
